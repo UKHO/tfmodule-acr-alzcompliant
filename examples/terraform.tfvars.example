@@ -1,0 +1,73 @@
+# ============================================
+# Example terraform.tfvars file
+# Copy this file to terraform.tfvars and customize with your values
+# ============================================
+
+# Required Variables
+name                = "myacr001"
+resource_group_name = "rg-container-services"
+location            = "UK South"
+
+# SKU Selection (Basic, Standard, or Premium)
+sku = "Premium"
+
+# Required ALZ Tags
+tags = {
+  SERVICE          = "container-registry"
+  ENVIRONMENT      = "dev"
+  SERVICE_OWNER    = "devops-chapter"
+  RESPONSIBLE_TEAM = "devops"
+  CALLOUT_TEAM     = "platform-support"
+  COST_CENTRE      = "IT-001"
+}
+
+# Security Configuration
+public_network_access_enabled = false
+export_policy_enabled         = true
+network_rule_bypass_option    = "AzureServices"
+
+# Premium SKU Features (only applicable when sku = "Premium")
+quarantine_policy_enabled = false
+retention_policy_in_days  = 7
+trust_policy_enabled      = false
+zone_redundancy_enabled   = false
+data_endpoint_enabled     = false
+
+# Managed Identity
+identity_type = "SystemAssigned"
+# identity_ids  = []  # Uncomment and populate for UserAssigned identity
+
+# Customer-Managed Encryption (Premium SKU only)
+encryption_enabled = false
+# encryption_key_vault_key_id   = "/subscriptions/xxx/resourceGroups/xxx/providers/Microsoft.KeyVault/vaults/xxx/keys/xxx"
+# encryption_identity_client_id = "xxx-xxx-xxx-xxx-xxx"
+
+# Geo-Replication (Premium SKU only)
+# georeplications = [
+#   {
+#     location                  = "UK West"
+#     zone_redundancy_enabled   = true
+#     regional_endpoint_enabled = true
+#     tags                      = {}
+#   }
+# ]
+
+# Network Rules (Premium SKU only)
+# network_rule_set = {
+#   default_action = "Deny"
+#   ip_rules       = ["1.2.3.4/32", "5.6.7.8/32"]
+# }
+
+# Private Endpoint Configuration
+create_private_endpoint = false
+# private_endpoint_subnet_id = "/subscriptions/xxx/resourceGroups/xxx/providers/Microsoft.Network/virtualNetworks/xxx/subnets/xxx"
+# private_dns_zone_ids       = ["/subscriptions/xxx/resourceGroups/xxx/providers/Microsoft.Network/privateDnsZones/privatelink.azurecr.io"]
+
+# Monitoring
+enable_diagnostic_settings = true
+# log_analytics_workspace_id = "/subscriptions/xxx/resourceGroups/xxx/providers/Microsoft.OperationalInsights/workspaces/xxx"
+
+# Additional Tags (optional)
+additional_tags = {
+  Project = "MyProject"
+}

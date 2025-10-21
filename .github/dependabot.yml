@@ -1,0 +1,87 @@
+# ============================================
+# Dependabot Configuration
+# Automatically updates Terraform and provider versions
+# ============================================
+
+version: 2
+updates:
+  # Update Terraform configuration files
+  - package-ecosystem: "terraform"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Europe/London"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "terraform"
+      - "automated"
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    # Group all Terraform provider updates into a single PR
+    groups:
+      terraform-providers:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+    # Only create PRs for version updates that match our constraints
+    ignore:
+      - dependency-name: "hashicorp/azurerm"
+        update-types: ["version-update:semver-major"]
+
+  # Update Terraform configuration files in examples/basic
+  - package-ecosystem: "terraform"
+    directory: "/examples/basic"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Europe/London"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+      - "terraform"
+      - "examples"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+
+  # Update Terraform configuration files in examples/premium-with-private-endpoint
+  - package-ecosystem: "terraform"
+    directory: "/examples/premium-with-private-endpoint"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Europe/London"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+      - "terraform"
+      - "examples"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+
+  # Update Terraform configuration files in examples/with-encryption
+  - package-ecosystem: "terraform"
+    directory: "/examples/with-encryption"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Europe/London"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+      - "terraform"
+      - "examples"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
